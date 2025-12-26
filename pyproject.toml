@@ -1,0 +1,56 @@
+[project]
+name = "dbt-subprocess-plugin"
+version = "0.1.0"
+description = "dbt plugin to add Python's subprocess module to dbt's `modules` context attribute"
+readme = "README.md"
+authors = [
+    { name = "Tim Vergenz", email = "vergenzt@gmail.com" }
+]
+requires-python = ">=3.8"
+dependencies = [
+    "dbt-core>=1.6",
+]
+
+[dependency-groups]
+dev = [
+    "hatch>=1.14.2",
+    "pytest>=8.3.5",
+    "dbt-duckdb",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.envs.hatch-test]
+installer = "uv"
+dependency-groups = ["dev"]
+dependencies = [
+    "dbt-core~={matrix:dbt-core-version}",
+    "dbt-duckdb<={matrix:dbt-core-version}",
+]
+
+[tool.hatch.envs.hatch-test.env-vars]
+ENV_NAME = "{env_name}"
+DBT_SEND_ANONYMOUS_USAGE_STATS = "False"  # https://docs.getdbt.com/reference/global-configs/usage-stats
+
+[[tool.hatch.envs.hatch-test.matrix]]
+python = ["3.8"]
+dbt-core-version = [
+    "1.6",
+    "1.7",
+    "1.8",
+]
+
+[[tool.hatch.envs.hatch-test.matrix]]
+python = ["3.9"]
+dbt-core-version = [
+    "1.9",
+    "1.10",
+]
+
+[[tool.hatch.envs.hatch-test.matrix]]
+python = ["3.10"]
+dbt-core-version = [
+    "1.11",
+]
