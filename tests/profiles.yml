@@ -1,0 +1,6 @@
+test_profile:
+  outputs:
+    default:
+      type: duckdb
+      path: '{{ env_var("DB_PATH") }}'
+
