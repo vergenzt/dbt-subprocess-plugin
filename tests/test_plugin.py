@@ -2,11 +2,10 @@ import json
 import os
 import re
 from pathlib import Path
-from subprocess import check_call
 from urllib.parse import urlparse
 
-from pytest import fixture
 import tinypg
+from pytest import fixture
 
 DBT_PROFILES_DIR = Path(__file__).parent
 DBT_PROFILE = "test_profile"
