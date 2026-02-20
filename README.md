@@ -8,7 +8,7 @@ This is a [dbt plugin][] to add Python's [subprocess][] module to dbt's [`module
 
 ## Usage
 
-1. Install `dbt-subprocess-plugin` into the same Python environment as dbt itself.
+1. Install `dbt-subprocess-plugin` via PyPI into the same Python environment as dbt itself.
 2. Start using it!
 
 ## Example
