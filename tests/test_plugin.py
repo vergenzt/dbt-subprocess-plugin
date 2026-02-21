@@ -9,7 +9,9 @@ from pytest import fixture
 
 DBT_PROFILES_DIR = Path(__file__).parent
 DBT_PROFILE = "test_profile"
-DBT_PROJECT_NAME = "test_" + re.sub(r"[^\w]", "_", os.getenv("ENV_NAME", "dbt_subprocess").lower())
+DBT_PROJECT_NAME = "test_" + re.sub(
+    r"[^\w]", "_", os.getenv("ENV_NAME", DBT_PROFILES_DIR.parent.name).lower()
+)
 DBT_PROJECT_YML: str = json.dumps(
     {
         "name": DBT_PROJECT_NAME,
@@ -52,6 +54,7 @@ def test_plugin_works(dbt_project: Path):
     """)
 
     from dbt.cli.main import cli
+
     cli(["compile"], standalone_mode=False)
 
     model_compiled_path = (
